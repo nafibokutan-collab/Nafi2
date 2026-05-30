@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新新総合英語 時制クイズアプリ</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --background-color: #f5f7fa;
+            --card-color: #ffffff;
+            --text-color: #2c3e50;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: var(--card-color);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 5px;
+            color: #1a252f;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: #ecf0f1;
+            border-radius: 3px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-box {
+            font-size: 1.15rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .option-btn {
+            background-color: #fff;
+            border: 2px solid #e2e8f0;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary-color);
+            background-color: #f0f7ff;
+        }
+
+        .option-btn.correct {
+            background-color: #e8f5e9;
+            border-color: var(--success-color);
+            color: #2e7d32;
+        }
+
+        .option-btn.wrong {
+            background-color: #ffebee;
+            border-color: var(--error-color);
+            color: #c62828;
+        }
+
+        .feedback-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .feedback-box.correct {
+            display: block;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid var(--success-color);
+        }
+
+        .feedback-box.wrong {
+            display: block;
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid var(--error-color);
+        }
+
+        .explanation {
+            margin-top: 8px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .next-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .next-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .result-screen {
+            text-align: center;
+            display: none;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+
+        .restart-btn {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="quiz-screen">
+        <h1 id="chapter-title">第1章：時制</h1>
+        <div class="subtitle" id="question-number">Question 1 / 30</div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+
+        <div class="question-box" id="question-text">
+            Loading...
+        </div>
+
+        <div class="options-list" id="options-container">
+            </div>
+
+        <div class="feedback-box" id="feedback-box">
+            <strong id="result-text">正解！</strong>
+            <div class="explanation" id="explanation-text"></div>
+        </div>
+
+        <button class="next-btn" id="next-btn" onclick="nextQuestion()">次の問題へ</button>
+    </div>
+
+    <div class="result-screen" id="result-screen">
+        <h1>お疲れ様でした！</h1>
+        <div class="subtitle">クイズ結果</div>
+        <div class="score-display"><span id="score">0</span> / 30</div>
+        <p id="comment"></p>
+        <button class="restart-btn" onclick="restartQuiz()">最初から解き直す</button>
+    </div>
+</div>
+
+<script>
+// 30問のクイズデータ一式
+const quizData = {
+  "questions": [
+    { "id": 1, "question": "I will call you when I ( ) at the station tomorrow.", "options": ["arrive", "will arrive", "arrived", "am arriving"], "answer": "arrive", "explanation": "whenが「〜する時」という副詞節を作るため、未来の事柄であっても現在形を用います。" },
+    { "id": 2, "question": "I don't know when he ( ) back next week.", "options": ["comes", "will come", "come", "has come"], "answer": "will come", "explanation": "whenはknowの目的語となる名詞節（〜するかどうか）を作っているため、未来のことは通常通りwillを用いて表します。" },
+    { "id": 3, "question": "If it ( ) rainy tomorrow, the game will be postponed.", "options": ["is", "will be", "be", "was"], "answer": "is", "explanation": "ifが「もし〜ならば」という条件の副詞節を作るため、明日のことであっても現在形（is）にします。" },
+    { "id": 4, "question": "I am wondering if it ( ) rainy tomorrow.", "options": ["is", "will be", "be", "was"], "answer": "will be", "explanation": "ifはwonderの目的語となる名詞節（〜かどうか）を作っているため、未来の事柄にはwill beを用います。" },
+    { "id": 5, "question": "Look! A cute bird ( ) on the branch of that tree.", "options": ["sits", "is sitting", "has sat", "sit"], "answer": "is sitting", "explanation": "Look!（見て！）と現時点で目撃している具体的な動作・一時的な状態を表すため、現在進行形が最適です。" },
+    { "id": 6, "question": "Water ( ) at 100 degrees Celsius under normal pressure.", "options": ["boils", "is boiling", "will boil", "boiled"], "answer": "boils", "explanation": "不変の真理や科学的事実は、過去・現在・未来に関わらず常に現在形で表します。" },
+    { "id": 7, "question": "The train for Tokyo ( ) at 9:00 a.m. tomorrow according to the timetable.", "options": ["leaves", "will have left", "left", "is left"], "answer": "leaves", "explanation": "時刻表や確定した公的な予定は、未来のことでも現在形（または進行形）で表現するのが標準的です。" },
+    { "id": 8, "question": "When I visited my uncle yesterday, he ( ) a book in his room.", "options": ["read", "was reading", "has read", "had read"], "answer": "was reading", "explanation": "「私が訪ねた」という過去の1点において、伯父が「読書している最中だった」ため、過去進行形にします。" },
+    { "id": 9, "question": "This desk ( ) to my grandfather for over fifty years.", "options": ["belongs", "is belonging", "has belonged", "had belonged"], "answer": "has belonged", "explanation": "belong（属する）は状態動詞なので進行形にできません。50年間という期間の「状態の継続」は現在完了形で表します。" },
+    { "id": 10, "question": "I ( ) my homework yet, so I cannot go out with you now.", "options": ["haven't finished", "didn't finish", "don't finish", "hadn't finished"], "answer": "haven't finished", "explanation": "yet（まだ）を伴い、現時点での「完了・結果」を表すため現在完了の否定形が適切です。" },
+    { "id": 11, "question": "I ( ) the famous movie three times so far.", "options": ["see", "saw", "have seen", "am seeing"], "answer": "have seen", "explanation": "three times（3回）やso far（今までに）という経験を表すキーワードがあるため、現在完了形を選びます。" },
+    { "id": 12, "question": "My sister ( ) to Paris; she is not at home now.", "options": ["has been", "has gone", "went", "had gone"], "answer": "has gone", "explanation": "「パリに行ってしまって（今ここにはいない）」という結果を表すには、has gone toを用います（has been toは経験/滞在）。" },
+    { "id": 13, "question": "We ( ) each other since we were elementary school students.", "options": ["know", "are knowing", "have known", "have been knowing"], "answer": "have known", "explanation": "knowは状態動詞なので「現在完了進行形」にはできません。継続を表す場合も通常の現在完了形にします。" },
+    { "id": 14, "question": "It ( ) raining for three hours, and the ground is completely wet.", "options": ["is", "was", "has been", "had been"], "answer": "has been", "explanation": "for three hours（3時間ずっと）という動作の継続であり、rainは動作動詞なので現在完了進行形（has been raining）にします。" },
+    { "id": 15, "question": "I ( ) my smartphone yesterday, so I have to buy a new one.", "options": ["have lost", "lost", "had lost", "lose"], "answer": "lost", "explanation": "yesterdayのような過去の1点を明示する副詞は、現在完了形と一緒に用いることができません。過去形が正解です。" },
+    { "id": 16, "question": "When ( ) the project?", "options": ["have you finished", "did you finish", "do you finish", "had you finished"], "answer": "did you finish", "explanation": "When（いつ）で過去の時点を直接尋ねる疑問文では、現在完了形（have you 〜）は使用できません。" },
+    { "id": 17, "question": "By the time he arrives tomorrow, we ( ) dinner.", "options": ["will finish", "finish", "will have finished", "have finished"], "answer": "will have finished", "explanation": "「明日彼が到着する（未来の1点）までに、私たちは〜し終えているだろう」という未来の完了・結果は未来完了形（will have ＋過去分詞）で表します。" },
+    { "id": 18, "question": "When I reached the stadium, the soccer game ( ) already.", "options": ["started", "has started", "had started", "was starting"], "answer": "had started", "explanation": "「私がスタジアムに到着した（過去）」よりも前に「試合が始まっていた（大過去）」ため、過去完了形を用います。" },
+    { "id": 19, "question": "They ( ) for two hours when it suddenly began to snow.", "options": ["had been tennis playing", "had been playing tennis", "have been playing tennis", "were playing tennis"], "answer": "had been playing tennis", "explanation": "雪が降り始めた（過去の点）まで、2時間ずっとテニスをやり続けていた（過去の点までの動作の継続）ので、過去完了進行形が適切です。" },
+    { "id": 20, "question": "I recognized the teacher at once because I ( ) him before.", "options": ["saw", "have seen", "had seen", "was seeing"], "answer": "had seen", "explanation": "「認識した（過去）」よりも前の「以前に会ったことがある（過去の時点までの経験）」を表すため、過去完了形にします。" },
+    { "id": 21, "question": "It ( ) ten years since my grandfather passed away.", "options": ["is", "has been", "passed", "Both 'is' and 'has been' are correct"], "answer": "Both 'is' and 'has been' are correct", "explanation": "「〜してから10年になる」は、It is 10 years since... / It has been 10 years since... のどちらの表現も認められています。" },
+    { "id": 22, "question": "Ten years ( ) passed since the museum was built.", "options": ["is", "are", "has", "have"], "answer": "have", "explanation": "Ten years を主語にして「10年が経過した」と言う場合、passedが一般動詞の過去分詞なので、現在完了を作るhaveを用います。" },
+    { "id": 23, "question": "I ( ) to call you as soon as I get home.", "options": ["am not forgetting", "will not forget", "don't forget", "haven't forgotten"], "answer": "will not forget", "explanation": "「忘れないようにするよ」という、発話しているその場での主語の「意志」を表すため、willを用います。" },
+    { "id": 24, "question": "I ( ) dinner with Ken tonight, so I cannot accept your invitation.", "options": ["have", "am having", "had", "have had"], "answer": "am having", "explanation": "現在進行形（am having）を用いて、個人的にすでに手配・準備が済んでいる「確定的な近い未来の予定」を表すことができます。" },
+    { "id": 25, "question": "He told me that light ( ) faster than sound.", "options": ["travels", "traveled", "will travel", "is traveling"], "answer": "travels", "explanation": "「光は音より速く進む」は自然界の法則（不変の真理）であるため、主節の動詞がtold（過去）であっても時制の一致を受けず現在形のままにします。" },
+    { "id": 26, "question": "Our history teacher said that World War II ( ) in 1939.", "options": ["breaks out", "broke out", "had broken out", "has broken out"], "answer": "broke out", "explanation": "歴史上の事実（1939年の出来事）は、主節の時制に関わらず、過去完了形にせず常に過去形で表します。" },
+    { "id": 27, "question": "I ( ) of moving to another city, but I haven't decided yet.", "options": ["think", "am thinking", "have thought", "thought"], "answer": "am thinking", "explanation": "thinkは「〜と思う（状態）」の時は進行形不可ですが、「（今頭の中で）考えている、検討している（心理的動作）」の時は進行形にできます。" },
+    { "id": 28, "question": "When you ( ) the next station, please change to the Yamanote Line.", "options": ["reach", "will reach", "reached", "are reaching"], "answer": "reach", "explanation": "命令文を伴うwhen節も、「次に駅に到着したときに」という未来の条件を表す副詞節となるため、現在形を用います。" },
+    { "id": 29, "question": "He ( ) always complaining about his job, which annoys everyone.", "options": ["is", "has", "does", "was been"], "answer": "is", "explanation": "alwaysを伴う現在進行形（is always -ing）は、「いつも〜ばかりしている」という非難・不満・あきれた気持ちなどの感情的な強調を表します。" },
+    { "id": 30, "question": "I ( ) for the bus for an hour when it finally arrived.", "options": ["am waiting", "was waiting", "had been waiting", "have been waiting"], "answer": "had been waiting", "explanation": "バスが到着した（過去）という時点まで、「1時間ずっと待ち続けていた」という過去のある時点までの動作の継続なので、過去完了進行形を選びます。" }
+  ]
+};
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function loadQuestion() {
+    const currentQuestion = quizData.questions[currentQuestionIndex];
+    
+    // 進捗の更新
+    document.getElementById("question-number").innerText = `Question ${currentQuestionIndex + 1} / ${quizData.questions.length}`;
+    const progressPercent = ((currentQuestionIndex) / quizData.questions.length) * 100;
+    document.getElementById("progress-fill").style.width = `${progressPercent}%`;
+
+    // 問題文のセット
+    document.getElementById("question-text").innerText = currentQuestion.question;
+
+    // 選択肢の生成
+    const optionsContainer = document.getElementById("options-container");
+    optionsContainer.innerHTML = "";
+    
+    currentQuestion.options.forEach(option => {
+        const button = document.createElement("button");
+        button.className = "option-btn";
+        button.innerText = option;
+        button.onclick = () => selectOption(button, option);
+        optionsContainer.appendChild(button);
+    });
+
+    // フィードバックと次へボタンを隠す
+    document.getElementById("feedback-box").className = "feedback-box";
+    document.getElementById("next-btn").style.display = "none";
+}
+
+function selectOption(selectedButton, selectedOption) {
+    const currentQuestion = quizData.questions[currentQuestionIndex];
+    const allButtons = document.querySelectorAll(".option-btn");
+    
+    // 全てのボタンを無効化
+    allButtons.forEach(btn => btn.disabled = true);
+
+    const feedbackBox = document.getElementById("feedback-box");
+    const resultText = document.getElementById("result-text");
+    const explanationText = document.getElementById("explanation-text");
+
+    if (selectedOption === currentQuestion.answer) {
+        selectedButton.classList.add("correct");
+        feedbackBox.className = "feedback-box correct";
+        resultText.innerText = "正解！";
+        score++;
+    } else {
+        selectedButton.classList.add("wrong");
+        feedbackBox.className = "feedback-box wrong";
+        resultText.innerText = "不正解...";
+        
+        // 正解のボタンをハイライト
+        allButtons.forEach(btn => {
+            if (btn.innerText === currentQuestion.answer) {
+                btn.classList.add("correct");
+            }
+        });
+    }
+
+    explanationText.innerText = currentQuestion.explanation;
+    document.getElementById("next-btn").style.display = "block";
+}
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizData.questions.length) {
+        loadQuestion();
+    } else {
+        showResults();
+    }
+}
+
+function showResults() {
+    document.getElementById("quiz-screen").style.display = "none";
+    document.getElementById("result-screen").style.display = "block";
+    document.getElementById("score").innerText = score;
+
+    let comment = "";
+    if (score === 30) comment = "完璧です！新新総合英語の時制マスターですね！";
+    else if (score >= 24) comment = "素晴らしい正答率です！細かい例外もよく理解できています。";
+    else if (score >= 15) comment = "合格点です！間違えた問題の解説をよく読み直してみましょう。";
+    else comment = "もう一度「時制」の章を読み直して、再チャレンジしてみましょう！";
+    
+    document.getElementById("comment").innerText = comment;
+}
+
+function restartQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById("result-screen").style.display = "none";
+    document.getElementById("quiz-screen").style.display = "block";
+    loadQuestion();
+}
+
+// 初回読み込み
+window.onload = loadQuestion;
+</script>
+</body>
+</html>
