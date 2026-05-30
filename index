@@ -1,0 +1,366 @@
+{
+  "chapter": "第1章：時制 (Tense)",
+  "description": "新新総合英語の解説に基づき、高校生が模試や定期試験で特に間違えやすい『細かい文脈判断』『時・条件の副詞節の罠』『進行形・完了形の例外語法』を30問厳選しました。",
+  "questions": [
+    {
+      "id": 1,
+      "question": "I will call you when I ( ) at the station tomorrow.",
+      "options": [
+        "arrive",
+        "will arrive",
+        "arrived",
+        "am arriving"
+      ],
+      "answer": "arrive",
+      "explanation": "whenが「〜する時」という副詞節を作るため、未来の事柄であっても現在形を用います。"
+    },
+    {
+      "id": 2,
+      "question": "I don't know when he ( ) back next week.",
+      "options": [
+        "comes",
+        "will come",
+        "come",
+        "has come"
+      ],
+      "answer": "will come",
+      "explanation": "whenはknowの目的語となる名詞節（〜するかどうか）を作っているため、未来のことは通常通りwillを用いて表します。"
+    },
+    {
+      "id": 3,
+      "question": "If it ( ) rainy tomorrow, the game will be postponed.",
+      "options": [
+        "is",
+        "will be",
+        "be",
+        "was"
+      ],
+      "answer": "is",
+      "explanation": "ifが「もし〜ならば」という条件の副詞節を作るため、明日のことであっても現在形（is）にします。"
+    },
+    {
+      "id": 4,
+      "question": "I am wondering if it ( ) rainy tomorrow.",
+      "options": [
+        "is",
+        "will be",
+        "be",
+        "was"
+      ],
+      "answer": "will be",
+      "explanation": "ifはwonderの目的語となる名詞節（〜かどうか）を作っているため、未来の事柄にはwill beを用います。"
+    },
+    {
+      "id": 5,
+      "question": "Look! A cute bird ( ) on the branch of that tree.",
+      "options": [
+        "sits",
+        "is sitting",
+        "has sat",
+        "sit"
+      ],
+      "answer": "is sitting",
+      "explanation": "Look!（見て！）と現時点で目撃している具体的な動作・一時的な状態を表すため、現在進行形が最適です。"
+    },
+    {
+      "id": 6,
+      "question": "Water ( ) at 100 degrees Celsius under normal pressure.",
+      "options": [
+        "boils",
+        "is boiling",
+        "will boil",
+        "boiled"
+      ],
+      "answer": "boils",
+      "explanation": "不変の真理や科学的事実は、過去・現在・未来に関わらず常に現在形で表します。"
+    },
+    {
+      "id": 7,
+      "question": "The train for Tokyo ( ) at 9:00 a.m. tomorrow according to the timetable.",
+      "options": [
+        "leaves",
+        "will have left",
+        "left",
+        "is left"
+      ],
+      "answer": "leaves",
+      "explanation": "時刻表や確定した公的な予定は、未来のことでも現在形（または進行形）で表現するのが標準的です。"
+    },
+    {
+      "id": 8,
+      "question": "When I visited my uncle yesterday, he ( ) a book in his room.",
+      "options": [
+        "read",
+        "was reading",
+        "has read",
+        "had read"
+      ],
+      "answer": "was reading",
+      "explanation": "「私が訪ねた」という過去の1点において、伯父が「読書している最中だった」ため、過去進行形にします。"
+    },
+    {
+      "id": 9,
+      "question": "This desk ( ) to my grandfather for over fifty years.",
+      "options": [
+        "belongs",
+        "is belonging",
+        "has belonged",
+        "had belonged"
+      ],
+      "answer": "has belonged",
+      "explanation": "belong（属する）は状態動詞なので進行形にできません。50年間という期間の「状態の継続」は現在完了形で表します。"
+    },
+    {
+      "id": 10,
+      "question": "I ( ) my homework yet, so I cannot go out with you now.",
+      "options": [
+        "haven't finished",
+        "didn't finish",
+        "don't finish",
+        "hadn't finished"
+      ],
+      "answer": "haven't finished",
+      "explanation": "yet（まだ）を伴い、現時点での「完了・結果」を表すため現在完了の否定形が適切です。"
+    },
+    {
+      "id": 11,
+      "question": "I ( ) the famous movie three times so far.",
+      "options": [
+        "see",
+        "saw",
+        "have seen",
+        "am seeing"
+      ],
+      "answer": "have seen",
+      "explanation": "three times（3回）やso far（今までに）という経験を表すキーワードがあるため、現在完了形を選びます。"
+    },
+    {
+      "id": 12,
+      "question": "My sister ( ) to Paris; she is not at home now.",
+      "options": [
+        "has been",
+        "has gone",
+        "went",
+        "had gone"
+      ],
+      "answer": "has gone",
+      "explanation": "「パリに行ってしまって（今ここにはいない）」という結果を表すには、has gone toを用います（has been toは経験/滞在）。"
+    },
+    {
+      "id": 13,
+      "question": "We ( ) each other since we were elementary school students.",
+      "options": [
+        "know",
+        "are knowing",
+        "have known",
+        "have been knowing"
+      ],
+      "answer": "have known",
+      "explanation": "knowは状態動詞なので「現在完了進行形」にはできません。継続を表す場合も通常の現在完了形にします。"
+    },
+    {
+      "id": 14,
+      "question": "It ( ) raining for three hours, and the ground is completely wet.",
+      "options": [
+        "is",
+        "was",
+        "has been",
+        "had been"
+      ],
+      "answer": "has been",
+      "explanation": "for three hours（3時間ずっと）という動作の継続であり、rainは動作動詞なので現在完了進行形（has been raining）にします。"
+    },
+    {
+      "id": 15,
+      "question": "I ( ) my smartphone yesterday, so I have to buy a new one.",
+      "options": [
+        "have lost",
+        "lost",
+        "had lost",
+        "lose"
+      ],
+      "answer": "lost",
+      "explanation": "yesterdayのような過去の1点を明示する副詞は、現在完了形と一緒に用いることができません。過去形が正解です。"
+    },
+    {
+      "id": 16,
+      "question": "When ( ) the project?",
+      "options": [
+        "have you finished",
+        "did you finish",
+        "do you finish",
+        "had you finished"
+      ],
+      "answer": "did you finish",
+      "explanation": "When（いつ）で過去の時点を直接尋ねる疑問文では、現在完了形（have you 〜）は使用できません。"
+    },
+    {
+      "id": 17,
+      "question": "By the time he arrives tomorrow, we ( ) dinner.",
+      "options": [
+        "will finish",
+        "finish",
+        "will have finished",
+        "have finished"
+      ],
+      "answer": "will have finished",
+      "explanation": "「明日彼が到着する（未来の1点）までに、私たちは〜し終えているだろう」という未来の完了・結果は未来完了形（will have ＋過去分詞）で表します。"
+    },
+    {
+      "id": 18,
+      "question": "When I reached the stadium, the soccer game ( ) already.",
+      "options": [
+        "started",
+        "has started",
+        "had started",
+        "was starting"
+      ],
+      "answer": "had started",
+      "explanation": "「私がスタジアムに到着した（過去）」よりも前に「試合が始まっていた（大過去）」ため、過去完了形を用います。"
+    },
+    {
+      "id": 19,
+      "question": "They ( ) for two hours when it suddenly began to snow.",
+      "options": [
+        "had been tennis playing",
+        "had been playing tennis",
+        "have been playing tennis",
+        "were playing tennis"
+      ],
+      "answer": "had been playing tennis",
+      "explanation": "雪が降り始めた（過去の点）まで、2時間ずっとテニスをやり続けていた（過去の点までの動作の継続）ので、過去完了進行形が適切です。"
+    },
+    {
+      "id": 20,
+      "question": "I recognized the teacher at once because I ( ) him before.",
+      "options": [
+        "saw",
+        "have seen",
+        "had seen",
+        "was seeing"
+      ],
+      "answer": "had seen",
+      "explanation": "「認識した（過去）」よりも前の「以前に会ったことがある（過去の時点までの経験）」を表すため、過去完了形にします。"
+    },
+    {
+      "id": 21,
+      "question": "It ( ) ten years since my grandfather passed away.",
+      "options": [
+        "is",
+        "has been",
+        "passed",
+        "Both 'is' and 'has been' are correct"
+      ],
+      "answer": "Both 'is' and 'has been' are correct",
+      "explanation": "「〜してから10年になる」は、It is 10 years since... / It has been 10 years since... のどちらの表現も認められています。"
+    },
+    {
+      "id": 22,
+      "question": "Ten years ( ) passed since the museum was built.",
+      "options": [
+        "is",
+        "are",
+        "has",
+        "have"
+      ],
+      "answer": "have",
+      "explanation": "Ten years を主語にして「10年が経過した」と言う場合、passedが一般動詞の過去分詞なので、現在完了を作るhave（主語が複数扱いならhave、時間のまとまりならhasもあるが、passedを伴う場合はhaveが一般的）を用います。"
+    },
+    {
+      "id": 23,
+      "question": "I ( ) to call you as soon as I get home.",
+      "options": [
+        "am not forgetting",
+        "will not forget",
+        "don't forget",
+        "haven't forgotten"
+      ],
+      "answer": "will not forget",
+      "explanation": "「忘れないようにするよ」という、発話しているその場での主語の「意志」を表すため、willを用います。"
+    },
+    {
+      "id": 24,
+      "question": "I ( ) dinner with Ken tonight, so I cannot accept your invitation.",
+      "options": [
+        "have",
+        "am having",
+        "had",
+        "have had"
+      ],
+      "answer": "am having",
+      "explanation": "現在進行形（am having）を用いて、個人的にすでに手配・準備が済んでいる「確定的な近い未来の予定」を表すことができます。"
+    },
+    {
+      "id": 25,
+      "question": "He told me that light ( ) faster than sound.",
+      "options": [
+        "travels",
+        "traveled",
+        "will travel",
+        "is traveling"
+      ],
+      "answer": "travels",
+      "explanation": "「光は音より速く進む」は自然界の法則（不変の真理）であるため、主節の動詞がtold（過去）であっても時制の一致を受けず現在形のままにします。"
+    },
+    {
+      "id": 26,
+      "question": "Our history teacher said that World War II ( ) in 1939.",
+      "options": [
+        "breaks out",
+        "broke out",
+        "had broken out",
+        "has broken out"
+      ],
+      "answer": "broke out",
+      "explanation": "歴史上の事実（1939年の出来事）は、主節の時制に関わらず、過去完了形にせず常に過去形で表します。"
+    },
+    {
+      "id": 27,
+      "question": "I ( ) of moving to another city, but I haven't decided yet.",
+      "options": [
+        "think",
+        "am thinking",
+        "have thought",
+        "thought"
+      ],
+      "answer": "am thinking",
+      "explanation": "thinkは「〜と思う（状態）」の時は進行形不可ですが、「（今あれこれ頭の中で）考えている、検討している（心理的動作）」の時は進行形にできます。"
+    },
+    {
+      "id": 28,
+      "question": "When you ( ) the next station, please change to the Yamanote Line.",
+      "options": [
+        "reach",
+        "will reach",
+        "reached",
+        "are reaching"
+      ],
+      "answer": "reach",
+      "explanation": "命令文（please change...）を伴うwhen節も、「次に駅に到着したときに」という未来の条件を表す副詞節となるため、現在形を用います。"
+    },
+    {
+      "id": 29,
+      "question": "He ( ) always complaining about his job, which annoys everyone.",
+      "options": [
+        "is",
+        "has",
+        "does",
+        "was been"
+      ],
+      "answer": "is",
+      "explanation": "alwaysを伴う現在進行形（is always -ing）は、「いつも〜ばかりしている」という非難・不満・あきれた気持ちなどの感情的な強調を表します。"
+    },
+    {
+      "id": 30,
+      "question": "I ( ) for the bus for an hour when it finally arrived.",
+      "options": [
+        "am waiting",
+        "was waiting",
+        "had been waiting",
+        "have been waiting"
+      ],
+      "answer": "had been waiting",
+      "explanation": "バスが到着した（過去）という時点まで、「1時間ずっと待ち続けていた」という過去のある時点までの動作の継続なので、過去完了進行形を選びます。"
+    }
+  ]
+}
