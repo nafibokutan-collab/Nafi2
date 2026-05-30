@@ -91,6 +91,8 @@
             cursor: pointer;
             text-align: left;
             transition: all 0.2s ease;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .option-btn:hover:not(:disabled) {
@@ -138,7 +140,6 @@
         }
 
         .next-btn {
-            display: block;
             width: 100%;
             background-color: var(--primary-color);
             color: white;
@@ -190,12 +191,9 @@
             <div class="progress-fill" id="progress-fill"></div>
         </div>
 
-        <div class="question-box" id="question-text">
-            Loading...
-        </div>
+        <div class="question-box" id="question-text">Loading...</div>
 
-        <div class="options-list" id="options-container">
-            </div>
+        <div class="options-list" id="options-container"></div>
 
         <div class="feedback-box" id="feedback-box">
             <strong id="result-text">正解！</strong>
@@ -215,7 +213,6 @@
 </div>
 
 <script>
-// 30問のクイズデータ一式
 const quizData = {
   "questions": [
     { "id": 1, "question": "I will call you when I ( ) at the station tomorrow.", "options": ["arrive", "will arrive", "arrived", "am arriving"], "answer": "arrive", "explanation": "whenが「〜する時」という副詞節を作るため、未来の事柄であっても現在形を用います。" },
@@ -247,7 +244,7 @@ const quizData = {
     { "id": 27, "question": "I ( ) of moving to another city, but I haven't decided yet.", "options": ["think", "am thinking", "have thought", "thought"], "answer": "am thinking", "explanation": "thinkは「〜と思う（状態）」の時は進行形不可ですが、「（今頭の中で）考えている、検討している（心理的動作）」の時は進行形にできます。" },
     { "id": 28, "question": "When you ( ) the next station, please change to the Yamanote Line.", "options": ["reach", "will reach", "reached", "are reaching"], "answer": "reach", "explanation": "命令文を伴うwhen節も、「次に駅に到着したときに」という未来の条件を表す副詞節となるため、現在形を用います。" },
     { "id": 29, "question": "He ( ) always complaining about his job, which annoys everyone.", "options": ["is", "has", "does", "was been"], "answer": "is", "explanation": "alwaysを伴う現在進行形（is always -ing）は、「いつも〜ばかりしている」という非難・不満・あきれた気持ちなどの感情的な強調を表します。" },
-    { "id": 30, "question": "I ( ) for the bus for an hour when it finally arrived.", "options": ["am waiting", "was waiting", "had been waiting", "have been waiting"], "answer": "had been waiting", "explanation": "バスが到着した（過去）という時点まで、「1時間ずっと待ち続けていた」という過去のある時点までの動作の継続なので、過去完了進行形を選びます。" }
+    { "id": 30, "question": "I ( ) for the bus for an hour when it finally arrived.", "options": ["am waiting", "was waiting", "had been waiting", "have been waiting"], "answer": "had been waiting", "explanation": "バスが到着した（過去）という時点まで、「1時間ずっと待ち続けていた」という過去のある時点までの動作の継続なので、過去完了進行形を選びます Rhodes。" }
   ]
 };
 
@@ -256,16 +253,11 @@ let score = 0;
 
 function loadQuestion() {
     const currentQuestion = quizData.questions[currentQuestionIndex];
-    
-    // 進捗の更新
     document.getElementById("question-number").innerText = `Question ${currentQuestionIndex + 1} / ${quizData.questions.length}`;
-    const progressPercent = ((currentQuestionIndex) / quizData.questions.length) * 100;
+    const progressPercent = (currentQuestionIndex / quizData.questions.length) * 100;
     document.getElementById("progress-fill").style.width = `${progressPercent}%`;
-
-    // 問題文のセット
     document.getElementById("question-text").innerText = currentQuestion.question;
 
-    // 選択肢の生成
     const optionsContainer = document.getElementById("options-container");
     optionsContainer.innerHTML = "";
     
@@ -277,8 +269,7 @@ function loadQuestion() {
         optionsContainer.appendChild(button);
     });
 
-    // フィードバックと次へボタンを隠す
-    document.getElementById("feedback-box").className = "feedback-box";
+    document.getElementById("feedback-box").style.display = "none";
     document.getElementById("next-btn").style.display = "none";
 }
 
@@ -286,7 +277,6 @@ function selectOption(selectedButton, selectedOption) {
     const currentQuestion = quizData.questions[currentQuestionIndex];
     const allButtons = document.querySelectorAll(".option-btn");
     
-    // 全てのボタンを無効化
     allButtons.forEach(btn => btn.disabled = true);
 
     const feedbackBox = document.getElementById("feedback-box");
@@ -296,14 +286,15 @@ function selectOption(selectedButton, selectedOption) {
     if (selectedOption === currentQuestion.answer) {
         selectedButton.classList.add("correct");
         feedbackBox.className = "feedback-box correct";
+        feedbackBox.style.display = "block";
         resultText.innerText = "正解！";
         score++;
     } else {
         selectedButton.classList.add("wrong");
         feedbackBox.className = "feedback-box wrong";
+        feedbackBox.style.display = "block";
         resultText.innerText = "不正解...";
         
-        // 正解のボタンをハイライト
         allButtons.forEach(btn => {
             if (btn.innerText === currentQuestion.answer) {
                 btn.classList.add("correct");
@@ -346,7 +337,6 @@ function restartQuiz() {
     loadQuestion();
 }
 
-// 初回読み込み
 window.onload = loadQuestion;
 </script>
 </body>
